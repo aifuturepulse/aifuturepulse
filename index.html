@@ -44,8 +44,8 @@
 
         /* Navbar with Icons */
         .nav-links { display: flex; justify-content: center; gap: 15px; background: var(--nav-bg); padding: 12px; border-bottom: 1px solid var(--border-color); overflow-x: auto; }
-        .nav-links a { color: var(--text-color); text-decoration: none; font-weight: 600; font-size: 0.95rem; white-space: nowrap; display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 6px; background: var(--card-bg); border: 1px solid var(--border-color); }
-        .nav-links a:hover { border-color: var(--heading-color); color: var(--heading-color); }
+        .nav-links button { color: var(--text-color); text-decoration: none; font-weight: 600; font-size: 0.95rem; white-space: nowrap; display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 6px; background: var(--card-bg); border: 1px solid var(--border-color); cursor: pointer; }
+        .nav-links button:hover, .nav-links button.active { border-color: var(--heading-color); color: var(--heading-color); background: var(--hover-border); color: #fff; }
 
         /* Heatmap Pulse */
         .heatmap-pulse { background: #1f6feb; color: white; padding: 10px 20px; font-size: 0.9rem; text-align: center; font-weight: 600; }
@@ -108,15 +108,15 @@
         <button class="theme-toggle" onclick="toggleTheme()">☀️ / 🌙 Theme</button>
     </header>
 
-    <!-- Icon Navbar -->
+    <!-- Icon Navbar with Category Filter Logic -->
     <div class="nav-links">
-        <a href="#">🏠 Home</a>
-        <a href="#">🛠️ AI Tools</a>
-        <a href="#">🚀 Prompts</a>
-        <a href="#">📄 Cheat Sheets</a>
-        <a href="#">🏷️ Deals</a>
-        <a href="#">⚡ AI Fails</a>
-        <a href="#">💼 Job Board</a>
+        <button class="active" onclick="filterCategory('all', this)">🏠 Home (Recent)</button>
+        <button onclick="filterCategory('tools', this)">🛠️ AI Tools</button>
+        <button onclick="filterCategory('prompts', this)">🚀 Prompts</button>
+        <button onclick="filterCategory('cheatsheets', this)">📄 Cheat Sheets</button>
+        <button onclick="filterCategory('deals', this)">🏷️ Deals</button>
+        <button onclick="filterCategory('fails', this)">⚡ AI Fails</button>
+        <button onclick="filterCategory('jobs', this)">💼 Job Board</button>
     </div>
 
     <!-- Trend Heatmap Pulse -->
@@ -136,11 +136,11 @@
     <div class="container">
         
         <!-- Main Content Feed -->
-        <main>
+        <main id="postFeed">
             <div class="ad-slot">📢 [AdSense Banner Space - Optimized Slot #1]</div>
 
-            <div class="card">
-                <div class="meta">🔥 Trending • Published Today • By Editorial Team</div>
+            <div class="card" data-category="tools">
+                <div class="meta">🔥 Trending • Published Today (Recent) • By Editorial Team</div>
                 <h3>How Autonomous AI Agents Are Replacing Traditional SaaS Workflows in 2026</h3>
                 <p>Discover how modern enterprises are deploying multi-agent systems to execute complex end-to-end tasks without human intervention.</p>
                 <div class="action-btns">
@@ -150,10 +150,19 @@
                 </div>
             </div>
 
-            <div class="card">
-                <div class="meta">💬 Community Wall • Anonymous Confessions</div>
+            <div class="card" data-category="fails">
+                <div class="meta">💬 Community Wall • Published Yesterday • Anonymous Confessions</div>
                 <h3>"We spent 3 months fine-tuning an LLM only to realize our dataset had duplicate CSV headers."</h3>
                 <p>An unfiltered look into engineering bottlenecks and late-night debugging nightmares shared by developers.</p>
+            </div>
+
+            <div class="card" data-category="prompts">
+                <div class="meta">🤖 Prompt Playground • Published 2 Days Ago • One-Click Copy</div>
+                <h3>The Ultimate System Prompt for Architecting Clean Full-Stack Code</h3>
+                <p>Copy this field-tested prompt to force LLMs to output production-grade, bug-free modular code on your very first try.</p>
+                <div class="action-btns">
+                    <button class="btn-sm" onclick="alert('Prompt copied to clipboard!')">📋 Copy Prompt</button>
+                </div>
             </div>
 
             <div class="ad-slot">📢 [AdSense Banner Space - Optimized Slot #2]</div>
@@ -187,6 +196,23 @@
     <script>
         function toggleTheme() {
             document.getElementById('body').classList.toggle('light-theme');
+        }
+
+        // Category Filtering Function
+        function filterCategory(category, btnElement) {
+            // Active class shift
+            document.querySelectorAll('.nav-links button').forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+
+            // Filter cards
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
         }
 
         window.onscroll = function() {
