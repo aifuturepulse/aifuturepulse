@@ -42,10 +42,10 @@
         .logo-area p { color: #8b949e; font-size: 0.95rem; }
         .theme-toggle { background: var(--nav-bg); border: 1px solid var(--border-color); color: var(--text-color); padding: 8px 14px; border-radius: 6px; cursor: pointer; font-weight: bold; }
 
-        /* Navbar */
-        .nav-links { display: flex; justify-content: center; gap: 20px; background: var(--nav-bg); padding: 12px; border-bottom: 1px solid var(--border-color); overflow-x: auto; }
-        .nav-links a { color: var(--text-color); text-decoration: none; font-weight: 600; font-size: 0.95rem; white-space: nowrap; }
-        .nav-links a:hover { color: var(--heading-color); }
+        /* Navbar with Icons */
+        .nav-links { display: flex; justify-content: center; gap: 15px; background: var(--nav-bg); padding: 12px; border-bottom: 1px solid var(--border-color); overflow-x: auto; }
+        .nav-links a { color: var(--text-color); text-decoration: none; font-weight: 600; font-size: 0.95rem; white-space: nowrap; display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 6px; background: var(--card-bg); border: 1px solid var(--border-color); }
+        .nav-links a:hover { border-color: var(--heading-color); color: var(--heading-color); }
 
         /* Heatmap Pulse */
         .heatmap-pulse { background: #1f6feb; color: white; padding: 10px 20px; font-size: 0.9rem; text-align: center; font-weight: 600; }
@@ -108,15 +108,15 @@
         <button class="theme-toggle" onclick="toggleTheme()">☀️ / 🌙 Theme</button>
     </header>
 
-    <!-- Navbar -->
+    <!-- Icon Navbar -->
     <div class="nav-links">
-        <a href="#">Home</a>
-        <a href="#">AI Tools</a>
-        <a href="#">Prompt Marketplace</a>
-        <a href="#">Cheat Sheets</a>
-        <a href="#">Deal Alerts</a>
-        <a href="#">AI Fails Wall</a>
-        <a href="#">Job Board</a>
+        <a href="#">🏠 Home</a>
+        <a href="#">🛠️ AI Tools</a>
+        <a href="#">🚀 Prompts</a>
+        <a href="#">📄 Cheat Sheets</a>
+        <a href="#">🏷️ Deals</a>
+        <a href="#">⚡ AI Fails</a>
+        <a href="#">💼 Job Board</a>
     </div>
 
     <!-- Trend Heatmap Pulse -->
@@ -128,7 +128,7 @@
     <div class="search-container">
         <div class="search-box">
             <input type="text" id="searchInput" placeholder="Search any AI tool, prompt, or future tech topic...">
-            <button class="search-btn" onclick="alert('Search triggered! Autonomous query processing ready.')">Search</button>
+            <button class="search-btn" onclick="alert('Search triggered!')">Search</button>
         </div>
     </div>
 
@@ -142,33 +142,21 @@
             <div class="card">
                 <div class="meta">🔥 Trending • Published Today • By Editorial Team</div>
                 <h3>How Autonomous AI Agents Are Replacing Traditional SaaS Workflows in 2026</h3>
-                <p>Discover how modern enterprises are deploying multi-agent systems to execute complex end-to-end tasks without human intervention, rewriting the rules of digital productivity.</p>
+                <p>Discover how modern enterprises are deploying multi-agent systems to execute complex end-to-end tasks without human intervention.</p>
                 <div class="action-btns">
-                    <button class="btn-sm" onclick="alert('Article added to Saved Bookmarks!')">🔖 Save</button>
-                    <button class="btn-sm" onclick="alert('Audio playback started.')">🔊 Listen (3 min)</button>
-                    <button class="btn-sm" onclick="alert('Share link copied!')">📤 Share</button>
+                    <button class="btn-sm" onclick="alert('Saved!')">🔖 Save</button>
+                    <button class="btn-sm" onclick="alert('Playing audio...')">🔊 Listen (3 min)</button>
+                    <button class="btn-sm" onclick="alert('Link copied!')">📤 Share</button>
                 </div>
             </div>
 
             <div class="card">
-                <div class="meta">💬 Unique Community Wall • Anonymous Confessions</div>
+                <div class="meta">💬 Community Wall • Anonymous Confessions</div>
                 <h3>"We spent 3 months fine-tuning an LLM only to realize our dataset had duplicate CSV headers."</h3>
-                <p>An unfiltered look into the actual engineering bottlenecks, late-night debugging nightmares, and hilarious startup fails shared anonymously by senior AI developers.</p>
-                <div class="action-btns">
-                    <button class="btn-sm" onclick="alert('Shared!')">📤 Share Story</button>
-                </div>
+                <p>An unfiltered look into engineering bottlenecks and late-night debugging nightmares shared by developers.</p>
             </div>
 
             <div class="ad-slot">📢 [AdSense Banner Space - Optimized Slot #2]</div>
-
-            <div class="card">
-                <div class="meta">🤖 Prompt Playground • One-Click Copy</div>
-                <h3>The Ultimate System Prompt for Architecting Clean Full-Stack Code</h3>
-                <p>Copy this field-tested prompt to force LLMs to output production-grade, bug-free modular code on your very first try.</p>
-                <div class="action-btns">
-                    <button class="btn-sm" onclick="alert('Prompt copied to clipboard!')">📋 Copy Prompt</button>
-                </div>
-            </div>
         </main>
 
         <!-- Sidebar -->
@@ -179,25 +167,13 @@
                     <li><a href="#">• Building Autonomous RAG Pipelines</a></li>
                     <li><a href="#">• Top 10 Free AI Video Generators</a></li>
                     <li><a href="#">• Mastering Prompt Engineering</a></li>
-                    <li><a href="#">• Zero-Cost Hosting Blueprints</a></li>
                 </ul>
             </div>
 
             <div class="sidebar-widget">
                 <h4>📧 Weekly AI Drop</h4>
-                <p style="font-size: 0.85rem; color: #8b949e; margin-bottom: 10px;">Get elite tech insights delivered straight to your inbox.</p>
-                <input type="email" placeholder="Enter your email address...">
-                <button class="sub-btn" onclick="alert('Subscribed successfully!')">Subscribe Now</button>
-            </div>
-
-            <div class="sidebar-widget">
-                <h4>🏷️ Popular Tags</h4>
-                <p style="font-size: 0.85rem; line-height: 2;">
-                    <span style="background:var(--nav-bg); padding:4px 8px; border-radius:4px; margin-right:4px;">#Python</span>
-                    <span style="background:var(--nav-bg); padding:4px 8px; border-radius:4px; margin-right:4px;">#OpenAI</span>
-                    <span style="background:var(--nav-bg); padding:4px 8px; border-radius:4px; margin-right:4px;">#Vercel</span>
-                    <span style="background:var(--nav-bg); padding:4px 8px; border-radius:4px;">#Automation</span>
-                </p>
+                <input type="email" placeholder="Enter your email...">
+                <button class="sub-btn" onclick="alert('Subscribed!')">Subscribe Now</button>
             </div>
         </aside>
 
@@ -205,17 +181,14 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2026 AI Future Pulse. All rights reserved. Built for Global Tech Dominance.</p>
+        <p>&copy; 2026 AI Future Pulse. All rights reserved.</p>
     </footer>
 
     <script>
-        // Theme Toggle Function
         function toggleTheme() {
-            const body = document.getElementById('body');
-            body.classList.toggle('light-theme');
+            document.getElementById('body').classList.toggle('light-theme');
         }
 
-        // Reading Progress Bar Script
         window.onscroll = function() {
             let winScroll = document.documentElement.scrollTop || document.body.scrollTop;
             let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
