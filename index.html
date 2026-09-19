@@ -108,7 +108,7 @@
         <button class="theme-toggle" onclick="toggleTheme()">☀️ / 🌙 Theme</button>
     </header>
 
-    <!-- Icon Navbar with Strict Category Filtering -->
+    <!-- Icon Navbar with Dynamic Filtering -->
     <div class="nav-links">
         <button class="active" onclick="filterCategory('all', this)">🏠 Home</button>
         <button onclick="filterCategory('tools', this)">🛠️ AI Tools</button>
@@ -135,68 +135,10 @@
     <!-- Main Grid Container -->
     <div class="container">
         
-        <!-- Main Content Feed -->
+        <!-- Main Content Feed (Dynamically Rendered from Database) -->
         <main id="postFeed">
             <div class="ad-slot">📢 [AdSense Banner Space - Optimized Slot #1]</div>
-
-            <!-- AI Tools Category Post -->
-            <div class="card" data-category="tools">
-                <div class="meta">🛠️ AI Tools Directory • Published Today</div>
-                <h3>Top 5 Free Autonomous AI Video Generators in 2026</h3>
-                <p>Explore the best open-source and free AI tools that allow creators to generate cinematic-grade video clips directly from text prompts.</p>
-                <div class="action-btns">
-                    <button class="btn-sm" onclick="alert('Saved to bookmarks!')">🔖 Save</button>
-                    <button class="btn-sm" onclick="alert('Opening tool...')">🔗 Visit Tool</button>
-                </div>
-            </div>
-
-            <!-- Prompts Category Post -->
-            <div class="card" data-category="prompts">
-                <div class="meta">🚀 Prompt Marketplace • Published Today</div>
-                <h3>The Ultimate System Prompt for Architecting Clean Full-Stack Code</h3>
-                <p>Copy this field-tested prompt to force LLMs to output production-grade, bug-free modular code on your very first try.</p>
-                <div class="action-btns">
-                    <button class="btn-sm" onclick="alert('Prompt copied!')">📋 Copy Prompt</button>
-                </div>
-            </div>
-
-            <!-- Cheat Sheets Category Post -->
-            <div class="card" data-category="cheatsheets">
-                <div class="meta">📄 Cheat Sheets Hub • Published Yesterday</div>
-                <h3>Python & LLM Fine-Tuning Cheat Sheet (Downloadable)</h3>
-                <p>A quick-reference guide covering transformer architectures, hyperparameters, quantization techniques, and LoRA configurations.</p>
-                <div class="action-btns">
-                    <button class="btn-sm" onclick="alert('Downloading cheat sheet...')">⬇️ Download PDF</button>
-                </div>
-            </div>
-
-            <!-- Deals Category Post -->
-            <div class="card" data-category="deals">
-                <div class="meta">🏷️ Deal Alerts & Freebies • Active Now</div>
-                <h3>Get $500 Free Cloud Credits for AI Agent Deployment</h3>
-                <p>Exclusive partner deal for AI Future Pulse readers: Claim your free cloud infrastructure credits before the quota expires this week.</p>
-                <div class="action-btns">
-                    <button class="btn-sm" onclick="alert('Redeeming deal...')">🎁 Claim Deal</button>
-                </div>
-            </div>
-
-            <!-- AI Fails Category Post -->
-            <div class="card" data-category="fails">
-                <div class="meta">⚡ AI Fails Wall • Community Confession</div>
-                <h3>"We spent 3 months fine-tuning an LLM only to realize our dataset had duplicate CSV headers."</h3>
-                <p>An unfiltered look into engineering bottlenecks, late-night debugging nightmares, and hilarious startup fails shared by developers.</p>
-            </div>
-
-            <!-- Job Board Category Post -->
-            <div class="card" data-category="jobs">
-                <div class="meta">💼 Tech Job Board • Remote Opportunity</div>
-                <h3>Senior Prompt Engineer & AI Workflow Architect (Remote)</h3>
-                <p>Global tech media collective is hiring full-time engineers specialized in autonomous agent workflows and automated content pipelines.</p>
-                <div class="action-btns">
-                    <button class="btn-sm" onclick="alert('Redirecting to application page...')">apply Now</button>
-                </div>
-            </div>
-
+            <!-- Dynamic Posts will inject here -->
             <div class="ad-slot">📢 [AdSense Banner Space - Optimized Slot #2]</div>
         </main>
 
@@ -226,27 +168,101 @@
     </footer>
 
     <script>
+        // Central Database of Posts (Mock JSON Backend)
+        // Jab bhi naya post dalna ho, bas yahan array mein ek object add kar dena bhai!
+        const postsDatabase = [
+            {
+                category: "tools",
+                meta: "🛠️ AI Tools Directory • Published Today",
+                title: "Top 5 Free Autonomous AI Video Generators in 2026",
+                excerpt: "Explore the best open-source and free AI tools that allow creators to generate cinematic-grade video clips directly from text prompts.",
+                action: '<button class="btn-sm" onclick="alert(\'Opening tool...\')">🔗 Visit Tool</button>'
+            },
+            {
+                category: "prompts",
+                meta: "🚀 Prompt Marketplace • Published Today",
+                title: "The Ultimate System Prompt for Architecting Clean Full-Stack Code",
+                excerpt: "Copy this field-tested prompt to force LLMs to output production-grade, bug-free modular code on your very first try.",
+                action: '<button class="btn-sm" onclick="alert(\'Prompt copied!\')">📋 Copy Prompt</button>'
+            },
+            {
+                category: "cheatsheets",
+                meta: "📄 Cheat Sheets Hub • Published Yesterday",
+                title: "Python & LLM Fine-Tuning Cheat Sheet (Downloadable)",
+                excerpt: "A quick-reference guide covering transformer architectures, hyperparameters, quantization techniques, and LoRA configurations.",
+                action: '<button class="btn-sm" onclick="alert(\'Downloading cheat sheet...\')">⬇️ Download PDF</button>'
+            },
+            {
+                category: "deals",
+                meta: "🏷️ Deal Alerts & Freebies • Active Now",
+                title: "Get $500 Free Cloud Credits for AI Agent Deployment",
+                excerpt: "Exclusive partner deal for AI Future Pulse readers: Claim your free cloud infrastructure credits before the quota expires this week.",
+                action: '<button class="btn-sm" onclick="alert(\'Redeeming deal...\')">🎁 Claim Deal</button>'
+            },
+            {
+                category: "fails",
+                meta: "⚡ AI Fails Wall • Community Confession",
+                title: '"We spent 3 months fine-tuning an LLM only to realize our dataset had duplicate CSV headers."',
+                excerpt: "An unfiltered look into engineering bottlenecks, late-night debugging nightmares, and hilarious startup fails shared by developers.",
+                action: ''
+            },
+            {
+                category: "jobs",
+                meta: "💼 Tech Job Board • Remote Opportunity",
+                title: "Senior Prompt Engineer & AI Workflow Architect (Remote)",
+                excerpt: "Global tech media collective is hiring full-time engineers specialized in autonomous agent workflows and automated content pipelines.",
+                action: '<button class="btn-sm" onclick="alert(\'Redirecting to application page...\')">Apply Now</button>'
+            }
+        ];
+
+        // Function to Render Posts Dynamically
+        function renderPosts(filterCat = 'all') {
+            const feed = document.getElementById('postFeed');
+            let adSlot1 = feed.querySelector('.ad-slot:first-child').outerHTML;
+            let adSlot2 = feed.querySelector('.ad-slot:last-child').outerHTML;
+            
+            let htmlContent = adSlot1;
+
+            let filteredPosts = filterCat === 'all' 
+                ? postsDatabase 
+                : postsDatabase.filter(p => p.category === filterCat);
+
+            filteredPosts.forEach(post => {
+                htmlContent += `
+                    <div class="card" data-category="${post.category}">
+                        <div class="meta">${post.meta}</div>
+                        <h3>${post.title}</h3>
+                        <p>${post.excerpt}</p>
+                        <div class="action-btns">
+                            <button class="btn-sm" onclick="alert('Saved to bookmarks!')">🔖 Save</button>
+                            ${post.action}
+                        </div>
+                    </div>
+                `;
+            });
+
+            htmlContent += adSlot2;
+            feed.innerHTML = htmlContent;
+        }
+
+        // Initial Load
+        window.onload = function() {
+            renderPosts('all');
+        };
+
+        // Theme Toggle
         function toggleTheme() {
             document.getElementById('body').classList.toggle('light-theme');
         }
 
-        // Strict Category Filtering Logic
+        // Category Filter Trigger
         function filterCategory(category, btnElement) {
-            // Update active state on buttons
             document.querySelectorAll('.nav-links button').forEach(btn => btn.classList.remove('active'));
             btnElement.classList.add('active');
-
-            // Show/Hide cards based on selected category
-            const cards = document.querySelectorAll('.card');
-            cards.forEach(card => {
-                if (category === 'all' || card.getAttribute('data-category') === category) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
+            renderPosts(category);
         }
 
+        // Reading Progress Bar
         window.onscroll = function() {
             let winScroll = document.documentElement.scrollTop || document.body.scrollTop;
             let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
