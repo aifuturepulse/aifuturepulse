@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Future Pulse - Global AI & Future Tech Media</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #0d1117; color: #c9d1d9; line-height: 1.6; }
+        header { background: #161b22; padding: 20px; text-align: center; border-bottom: 1px solid #30363d; }
+        h1 { color: #58a6ff; font-size: 2.5rem; margin-bottom: 5px; }
+        p.tagline { color: #8b949e; font-size: 1.1rem; }
+        .container { max-width: 800px; margin: 40px auto; padding: 20px; text-align: center; }
+        .search-box { display: flex; gap: 10px; justify-content: center; margin-top: 30px; }
+        input[type="text"] { width: 70%; padding: 15px; font-size: 1rem; background: #21262d; border: 1px solid #30363d; color: #fff; border-radius: 8px; outline: none; }
+        input[type="text"]:focus { border-color: #58a6ff; }
+        button { padding: 15px 25px; font-size: 1rem; background: #238636; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; transition: background 0.3s; }
+        button:hover { background: #2ea043; }
+        .content-area { margin-top: 40px; text-align: left; background: #161b22; padding: 25px; border-radius: 12px; border: 1px solid #30363d; }
+        .content-area h2 { color: #58a6ff; margin-bottom: 15px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>AI Future Pulse</h1>
+        <p class="tagline">Your Gateway to the Autonomous AI & Future Tech Era</p>
+    </header>
+
+    <div class="container">
+        <h2>What do you want to explore today?</h2>
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search any AI tool, prompt, or future tech topic...">
+            <button onclick="handleSearch()">Search</button>
+        </div>
+
+        <div class="content-area" id="resultArea">
+            <h2>Welcome to AI Future Pulse</h2>
+            <p>Type any query above. If the article isn't available, our autonomous engine will instantly generate and publish it for you!</p>
+        </div>
+    </div>
+
+    <script>
+        function handleSearch() {
+            const query = document.getElementById('searchInput').value;
+            const resultArea = document.getElementById('resultArea');
+            if(query.trim() === "") {
+                alert("Pehle kuch type toh karo bhai!");
+                return;
+            }
+            resultArea.innerHTML = `<h2>Searching & Generating Content for: "${query}"</h2><p>Please wait 2 seconds while our AI backend fetches and publishes the latest insights...</p>`;
+            
+            // Yahan par hum aage apna Gemini AI backend integration karenge jo real-time post create karega!
+        }
+    </script>
+
+</body>
+</html>
