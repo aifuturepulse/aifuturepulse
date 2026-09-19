@@ -18,6 +18,7 @@
         button:hover { background: #2ea043; }
         .content-area { margin-top: 40px; text-align: left; background: #161b22; padding: 25px; border-radius: 12px; border: 1px solid #30363d; }
         .content-area h2 { color: #58a6ff; margin-bottom: 15px; }
+        .article-body { margin-top: 15px; white-space: pre-line; color: #e6edf3; }
     </style>
 </head>
 <body>
@@ -31,26 +32,51 @@
         <h2>What do you want to explore today?</h2>
         <div class="search-box">
             <input type="text" id="searchInput" placeholder="Search any AI tool, prompt, or future tech topic...">
-            <button onclick="handleSearch()">Search</button>
+            <button onclick="handleSearch()">Search & Generate</button>
         </div>
 
         <div class="content-area" id="resultArea">
             <h2>Welcome to AI Future Pulse</h2>
-            <p>Type any query above. If the article isn't available, our autonomous engine will instantly generate and publish it for you!</p>
+            <p>Type any query above. Our autonomous engine will instantly generate a full-scale blog post for you using Gemini AI!</p>
         </div>
     </div>
 
     <script>
-        function handleSearch() {
-            const query = document.getElementById('searchInput').value;
+        const GEMINI_API_KEY = "AQ.Ab8RN6JJFWTyIt-LMVK5cmb7t-rnmjQX0g2XVmeF8I0KQUg5uw";
+
+        async function handleSearch() {
+            const query = document.getElementById('searchInput').value.trim();
             const resultArea = document.getElementById('resultArea');
-            if(query.trim() === "") {
+            
+            if(query === "") {
                 alert("Pehle kuch type toh karo bhai!");
                 return;
             }
-            resultArea.innerHTML = `<h2>Searching & Generating Content for: "${query}"</h2><p>Please wait 2 seconds while our AI backend fetches and publishes the latest insights...</p>`;
-            
-            // Yahan par hum aage apna Gemini AI backend integration karenge jo real-time post create karega!
+
+            resultArea.innerHTML = `<h2>Autonomous Engine Working...</h2><p>Generating high-value article and embedding insights for: <b>"${query}"</b>. Please wait a few seconds...</p>`;
+
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [{ text: `Write a comprehensive, professional, SEO-optimized tech blog post about "${query}" for a website named AI Future Pulse. Include an engaging title, detailed body paragraphs, practical use cases, and a suggested video or resource section.` }]
+                        }]
+                    })
+                });
+
+                const data = await response.json();
+                const aiText = data.candidates[0].content.parts[0].text;
+
+                resultArea.innerHTML = `
+                    <h2>Generated Article: ${query}</h2>
+                    <div class="article-body">${aiText}</div>
+                `;
+            } catch (error) {
+                resultArea.innerHTML = `<h2>Error</h2><p>Failed to generate content. Please check your API key or connection.</p>`;
+                console.error(error);
+            }
         }
     </script>
 
